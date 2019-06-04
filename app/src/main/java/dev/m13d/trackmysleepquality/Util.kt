@@ -61,14 +61,11 @@ fun convertDurationToFormatted(startTimeMilli: Long, endTimeMilli: Long, res: Re
         }
         durationMilli < ONE_HOUR_MILLIS -> {
             val minutes = TimeUnit.MINUTES.convert(durationMilli, TimeUnit.MILLISECONDS)
-            val seconds = TimeUnit.SECONDS.convert(durationMilli - (minutes*60000), TimeUnit.MILLISECONDS)
-            res.getString(R.string.minutes_length, minutes, seconds, weekdayString)
+            res.getString(R.string.minutes_length, minutes, weekdayString)
         }
         else -> {
             val hours = TimeUnit.HOURS.convert(durationMilli, TimeUnit.MILLISECONDS)
-            val minutes = TimeUnit.MINUTES.convert(durationMilli - (hours*3600000), TimeUnit.MILLISECONDS)
-            val seconds = TimeUnit.SECONDS.convert(durationMilli - (hours*3600000) - (minutes*60000), TimeUnit.MILLISECONDS)
-            res.getString(R.string.hours_length, hours, minutes, seconds, weekdayString)
+            res.getString(R.string.hours_length, hours, weekdayString)
         }
     }
 }
