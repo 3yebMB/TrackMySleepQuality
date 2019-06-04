@@ -48,9 +48,12 @@ private val ONE_HOUR_MILLIS = TimeUnit.MILLISECONDS.convert(1, TimeUnit.HOURS)
  * @param endTimeMilli the end of the interval
  * @param res resources used to load formatted strings
  */
+@SuppressLint("StringFormatMatches")
 fun convertDurationToFormatted(startTimeMilli: Long, endTimeMilli: Long, res: Resources): String {
-    val durationMilli = endTimeMilli - startTimeMilli
+    val durationMilli = endTimeMilli - startTimeMilli - TimeZone.getDefault().rawOffset
+//    val durationMilli2 = SimpleDateFormat("H:mm:ss", Locale.getDefault()).format(durationMilli)
     val weekdayString = SimpleDateFormat("EEEE", Locale.getDefault()).format(startTimeMilli)
+//    return res.getString(R.string.time_length, durationMilli, weekdayString)
     return when {
         durationMilli < ONE_MINUTE_MILLIS -> {
             val seconds = TimeUnit.SECONDS.convert(durationMilli, TimeUnit.MILLISECONDS)
